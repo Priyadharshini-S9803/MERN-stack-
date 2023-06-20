@@ -1,0 +1,258 @@
+use testdb
+switched to db testdb
+show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+db
+testdb
+use secedb
+switched to db secedb
+db
+secedb
+db.sececollection.insert({name:'raja',id:1})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64916e152a3765fa76b6e618")
+  }
+}
+db,sececollection.find()
+ReferenceError: sececollection is not defined
+db.sececollection.find()
+{
+  _id: ObjectId("64916e152a3765fa76b6e618"),
+  name: 'raja',
+  id: 1
+}
+db.sececollection.insert({name:'riky',id:2})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64916eaa2a3765fa76b6e619")
+  }
+}
+db.sececollection.find()
+{
+  _id: ObjectId("64916e152a3765fa76b6e618"),
+  name: 'raja',
+  id: 1
+}
+{
+  _id: ObjectId("64916eaa2a3765fa76b6e619"),
+  name: 'riky',
+  id: 2
+}
+db.myCollection.insertMany([{name:'riky',id:2}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64916f912a3765fa76b6e61a")
+  }
+}
+db.myCollection.insertMany([{name:'Divan',id:3},{name:'madhu',id:4},{name:'deepika',id:5})])
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.myCollection.insertMany([{name:"Divan",id:3},{name:"madhu",id:4},{name:"deepika",id:5})])
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.myCollection.insertMany([{name:"Divan",id:3},{name:"madhu",id:4},{name:"deepika",id:5}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("649170af2a3765fa76b6e61b"),
+    '1': ObjectId("649170af2a3765fa76b6e61c"),
+    '2': ObjectId("649170af2a3765fa76b6e61d")
+  }
+}
+db.myCollection.find()
+{
+  _id: ObjectId("64916f912a3765fa76b6e61a"),
+  name: 'riky',
+  id: 2
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61b"),
+  name: 'Divan',
+  id: 3
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61c"),
+  name: 'madhu',
+  id: 4
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61d"),
+  name: 'deepika',
+  id: 5
+}
+db.sececollection.find("name" : "Divan")
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.myCollection.find("name" : "Divan")
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.myCollection.find({"name" : "Divan"})
+{
+  _id: ObjectId("649170af2a3765fa76b6e61b"),
+  name: 'Divan',
+  id: 3
+}
+db.myCollection.insertMany({name:"Divan"},{$set: { age: 5}});
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+db.myCollection.updateOne({name:"Divan"},{$set: { age: 5}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+secedb  144.00 KiB
+db.myCollection.updateOne({name:"Divan"},{$set: { id: 5}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.myCollection.find()
+{
+  _id: ObjectId("64916f912a3765fa76b6e61a"),
+  name: 'riky',
+  id: 2
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61b"),
+  name: 'Divan',
+  id: 5,
+  age: 5
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61c"),
+  name: 'madhu',
+  id: 4
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61d"),
+  name: 'deepika',
+  id: 5
+}
+db.myCollection.updateMany([{name:"Divan"},{$set: { id: 5}},{name:"madhu"},{$set: {id:6}}])
+MongoInvalidArgumentError: Update document requires atomic operators
+db.myCollection.updateMany({name:"Divan"},{$set: { id: 5}},{name:"madhu"},{$set: {id:6}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.myCollection.find()
+{
+  _id: ObjectId("64916f912a3765fa76b6e61a"),
+  name: 'riky',
+  id: 2
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61b"),
+  name: 'Divan',
+  id: 5,
+  age: 5
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61c"),
+  name: 'madhu',
+  id: 4
+}
+{
+  _id: ObjectId("649170af2a3765fa76b6e61d"),
+  name: 'deepika',
+  id: 5
+}
+db.myCollection.updateMany({{name:"Divan"},{$set: { id: 5}}},{{name:"madhu"},{$set: {id:6}}})
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+use tables
+switched to db tables
+show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+secedb  144.00 KiB
+db
+tables
+use cardb
+switched to db cardb
+db
+cardb
+db.carcollection.insert({name : 'innova',Model:'7STR',Rented_user_count: 3,})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64917bd62a3765fa76b6e61e")
+  }
+}
+db.carcollection.insert({name : 'innova',Model:'7STR',Rented_user_count: 3,Mileage:50,Transmission: 'automatic',Rent:5000,Fuel:'Diesel',Image_url:'https://feeds.abplive.com/onecms/images/uploaded-images/2022/11/28/92af7f7ba16aa32523e368e9e72249e8166961881910525_original.jpg?impolicy=abp_cdn&imwidth=720'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64917ca42a3765fa76b6e61f")
+  }
+}
+db.cardb.find()
+db.carCollection.find()
+db.carcollection.insert({name : 'innova',Model:'7STR',Rented_user_count: 3,Mileage:50,Transmission: 'automatic',Rent:5000,Fuel:'Diesel',Image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWsLoe-imG20v6vXJmlUw5H_60os49_37KDe8tUmxcXsUzqNJRI6yuyt4QV01l5brSGM&usqp=CAU'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64917e132a3765fa76b6e620")
+  }
+}
+db.carCollection.find()
+db.carCollection.find()
+use vehicle
+switched to db vehicle
+db
+vehicle
+db.vehiclecollection.insert({name : 'innova',Model:'7STR',Rented_user_count: 3,Mileage:50,Transmission: 'automatic',Rent:5000,Fuel:'Diesel',Image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWsLoe-imG20v6vXJmlUw5H_60os49_37KDe8tUmxcXsUzqNJRI6yuyt4QV01l5brSGM&usqp=CAU'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64917f642a3765fa76b6e621")
+  }
+}
+db.vehicleCollection.find()
+db.vehiclecollection.insert({name : 'innova',Model:'7STR',Rented_user_count: 3,Mileage:50,Transmission: 'automatic',Rent:5000,Fuel:'Diesel',Image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWsLoe-imG20v6vXJmlUw5H_60os49_37KDe8tUmxcXsUzqNJRI6yuyt4QV01l5brSGM&usqp=CAU'})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("649180412a3765fa76b6e622")
+  }
+}
+db.vehiclecollection.find()
+{
+  _id: ObjectId("64917f642a3765fa76b6e621"),
+  name: 'innnova',
+  Model: '7STR',
+  Rented_user_count: 3,
+  Mileage: 50,
+  Transmission: 'automatic',
+  Rent: 5000,
+  Fuel: 'Diesel',
+  Image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWsLoe-imG20v6vXJmlUw5H_60os49_37KDe8tUmxcXsUzqNJRI6yuyt4QV01l5brSGM&usqp=CAU'
+}
+{
+  _id: ObjectId("649180412a3765fa76b6e622"),
+  name: 'innova',
+  Model: '7STR',
+  Rented_user_count: 3,
+  Mileage: 50,
+  Transmission: 'automatic',
+  Rent: 5000,
+  Fuel: 'Diesel',
+  Image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWsLoe-imG20v6vXJmlUw5H_60os49_37KDe8tUmxcXsUzqNJRI6yuyt4QV01l5brSGM&usqp=CAU'
+}
+vehicle
+Selection deleted
