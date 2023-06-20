@@ -1,0 +1,62 @@
+--SQL queries
+
+CREATE TABLE students(ID integer,NAME varchar(20),DEP varchar(10)); 
+-- insert some values
+INSERT INTO students VALUES (1, 'Ryan', 'cs');
+INSERT INTO students VALUES (2, 'Joanna', 'cs');
+INSERT INTO students VALUES (3, 'Happy', 'ece');
+INSERT into students VALUES (4, 'anitha', 'cs'),(5, 'rita', 'mech'),(6, 'sita', 'cs'),(7, 'geeta', 'cs'),(8, 'nakul', 'cce'),(9, 'veer', 'cs'),(10, 'sitara', 'cs');
+
+-- fetch some values
+ALTER TABLE students add column email varchar(100);
+UPDATE students SET email = 'geeta123@gmail.com' where ID=7;
+DELETE FROM students where ID=2;
+SELECT * FROM students where ID between 1 and 7;
+SELECT * FROM students ;
+ALTER TABLE students add column AGE integer;
+UPDATE students set AGE=19;
+SELECT * FROM students;
+SELECT * FROM students order by ID desc;
+SELECT * FROM students order by ID asc;
+SELECT count(DEP) as total FROM students where DEP='cs';
+SELECT count(DEP) as total FROM students where DEP='ece';
+SELECT count(DEP) as total FROM students where DEP='mech';
+
+
+--JOINS
+
+CREATE TABLE students(ID integer,NAME varchar(20),DEP varchar(10),SUBJECTS varchar(20),MARKS integer);
+INSERT INTO students VALUES (2, 'seetha', 'cs', 'english', 90);
+INSERT INTO students VALUES (3, 'vidhya', 'ece', 'biology', 88);
+INSERT INTO students VALUES (6, 'kaviya', 'mech', 'physics', 95);
+INSERT INTO students VALUES (9, 'shifa', 'cs', 'maths', 99);
+
+CREATE TABLE staffs(ID integer,NAME varchar(20),DEP varchar(10),SUBJECTS varchar(20),Pass_percent integer);
+INSERT INTO staffs VALUES (5, 'sumithra', 'cs', 'english', 57);
+INSERT INTO staffs VALUES (4, 'kalai', 'ece', 'biology', 88);
+INSERT INTO staffs VALUES (10, 'veena', 'mech', 'physics', 89);
+INSERT INTO staffs VALUES (11, 'kavitha', 'cs', 'maths', 90);
+
+SELECT staffs.ID, students.NAME, students.DEP FROM students
+INNER JOIN staffs
+ON students.ID = students.ID;
+
+SELECT students.NAME,staffs.ID 
+FROM students
+LEFT JOIN staffs 
+ON staffs.ID = students.ID;
+
+SELECT students.NAME,staffs.ID 
+FROM students
+RIGHT JOIN staffs 
+ON staffs.ID = students.ID;
+
+SELECT students.NAME,staffs.ID 
+FROM students
+FULL JOIN staffs 
+ON staffs.ID = students.ID;
+
+--TO CALCULATE SUM and AVERAGE
+
+SELECT SUM(MARKS) FROM students;
+SELECT AVG(MARKS) FROM students;
